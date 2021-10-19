@@ -58,41 +58,46 @@ function exe2(){
     alert(`Elementos múltiplo de 3: ${m3} e qtde ${m3.length}`)
     alert(`Elementos múltiplo de 2 e 3: ${m23} e qtde ${m23.length}`)
 }
+
 function exe3(){
+    // declaração dos vetores
     let vetCodigos = []
     let vetEstoque = []
 
-    for(let i=0; i<10; i++){
-        vetCodigos[i]= Number(prompt(`Informe o código do produto ${i+1}`))
-        vetEstoque[i]= Number(prompt(`Informe o estoque do produto ${i+1}`))
-
+    // entrada de dados
+    for(let i=0;i<10;i++){
+        vetCodigos[i] = Number(prompt(`Informe o código do produto ${i+1}`))
+        vetEstoque[i] = Number(prompt(`Informe o estoque do produto ${i+1}`))
     }
+
     let cliente = Number(prompt(`Informe o código do cliente`))
     do {
-        let codigoCompra = Number(prompt(`Informe o códgio do produto para compra`))
-
-        let achou = false
+        let codigoCompra = Number(prompt(`Informe o código do produto para compra`))
+        // verifica se o código
+        let achou = false // ela é false quando não encontrou o produto, e true quando encontrou
         for(let i=0;i<10;i++){
-            if (codigoCompra == vetCodigos[i]){
+            if (codigoCompra == vetCodigos[i]){ // achou
                 achou = true
-
+                // atualiza estoque
                 let qtdeCompra = Number(prompt(`Informe a qtde da compra`))
-                if (vetEstoque[i] - qtdeCompra >= 0){
+                if (vetEstoque[i] - qtdeCompra >= 0){ // tem estoque suficiente
                     vetEstoque[i] = vetEstoque[i] - qtdeCompra
                 }
-                else{
+                else {
                     alert(`Qtde em estoque é insuficiente`)
                 }
             }
         }
-        if (!achou){
+        if (!achou){ // não encontrou
             alert(`Produto não comprado para venda`)
         }
+
         cliente = Number(prompt(`Informe o novo código do cliente. Digite 0 para encerrar`))
     }
     while(cliente != 0)
-    alert(`Estoque atualizado`)
+    alert(`Estoque atualizado ${vetEstoque}`)
 }
+
 function exe4() {
 
     // let vetor = [] // vetor com tamanho dinâmico
@@ -172,67 +177,59 @@ function exe6() {
     alert(`O menor valor a receber é ${menor} do vendedor ${nomeMenor}`)
 
 }
-function exe7() {
-    let vet = new Array(10)
-    let qttNegativo = 0; let somaPositivo = 0
 
-    for (let i = 0; i < 10; i++) {
-        vet[i] = Number(prompt(`Insira o ${i + 1}° número real: `))
-    }
-    for (let i = 0; i < 10; i++) {
-        if (vet[i] < 0) {
-            qttNegativo++
-        }
-        else if (vet[i] > 0) {
-            somaPositivo = somaPositivo + vet[i]
-        }
-    }
-    alert (`Quantidade de número negativos: ${qttNegativo}\nSoma dos números positivos: ${somaPositivo}`)
-}
-function exe8() {
-    let alunos = new Array(7)
-    let medias = new Array(7)
-    let maiorMedia = 0
-    let nomeMaior = ""
-    for (let i = 0; i < 7; i++) {
-        alunos[i] = String(prompt(`Insira o nome do ${i + 1}° aluno: `))
-        medias[i] = Number(prompt(`Insira a média final desse aluno: `))
-        if (medias[i] > maiorMedia) {
-            maiorMedia = medias[i]
-            nomeMaior = alunos[i]
-        }
-        if (medias[i] < 7) {
-            alert(`Para ser aprovado, o aluno ${alunos[i]} precisa tirar ${10 - medias[i]}`)
-        }
-    }
-    alert(`Nome do aluno com maior média: ${nomeMaior} (${maiorMedia})`)
-}
-function exe9() {
-    let vetProdutos = new Array(4)
-    let vetCodigos = new Array(4)
-    let vetPrecos = new Array(4)
-    let novoPreco = []
+function exe8(){
+    let vetNomes = new Array(7)
+    let vetMedias = new Array(7)
 
-    for(let i = 1; i <= 4; i++) {
-        vetProdutos[i] = prompt(`Digite o nome do produto:`)
-        vetCodigos[i] = Number(prompt(`Digite o código do produto:`))
-        vetPrecos[i] = Number(prompt(`Digite o preço do produto:`))
+    for(let i=0;i<7;i++){
+        vetNomes[i] = prompt(`Informe o nome do aluno ${i+1}`)
+        vetMedias[i] = Number(prompt(`Informe a média do aluno ${i+1}`))
     }
-    for(let i = 1; i <= 4; i++) {
-        if (vetPrecos[i] > 1000) {
-            novoPreco[i] == (vetPrecos[i] * (10 / 100))
+    // assume que o primeiro aluno tem a maior média
+    let nomeMaiorMedia = vetNomes[0]
+    let maiorMedia = vetMedias[0]
+    for(let i=0;i<7;i++){ // percorre o vetor
+        if (vetMedias[i] > maiorMedia){
+            maiorMedia = vetMedias[i]
+            nomeMaiorMedia = vetNomes[i]
         }
-        if (vetCodigos[i] % 2 === 0) {
-            novoPreco[i] == (vetPrecos[i] * (15 / 100))
-        }
-        if ((vetCodigos[i] % 2 === 0) && (vetPrecos[i] > 1000)) {
-            novoPreco[i] == (vetPrecos[i] * (20 / 100))
-        }
-        alert(`O produto ${vetProdutos} que custava R$${vetPrecos}, sofreu aumento e foi para R$${novoPreco}.`)
-    }
-    for(let i = 1; i <= 4; i++) {
-        if ((vetPrecos[i] < 1000) && (vetCodigos[i] % 2 !== 0)) {
-            alert(`O produto ${vetProdutos} não sofreu alteração no preço`)
+        if (vetMedias[i] < 7){
+            alert(`O aluno ${vetNomes[i]} está de exame e precisa tirar ${10 - vetMedias[i]}` )
         }
     }
+    alert(`Nome do aluno com maior média ${nomeMaiorMedia} com média ${maiorMedia}`)
+}
+
+function exe9(){
+    let vetNomes = new Array(10)
+    let vetCodigos = new Array(10)
+    let vetPrecos = new Array(10)
+    let vetNovos = new Array(10)
+    // leitura de dados
+    for(let i=0;i<10;i++){
+        vetNomes[i] = prompt(`Informe o nome do produto ${i+1}`)
+        vetCodigos[i] = Number(prompt(`Informe o código do produto ${i+1}`))
+        vetPrecos[i] = Number(prompt(`Informe o preço do produto ${i+1}`))
+    }
+    for(let i=0;i<10;i++){
+        if ((vetCodigos[i] % 2 == 0) && (vetPrecos[i] > 1000)) {
+            vetNovos[i] = vetPrecos[i] + (vetPrecos[i]*20/100)
+        }
+        else if (vetCodigos[i] % 2 == 0){
+            vetNovos[i] = vetPrecos[i] + (vetPrecos[i]*15/100)
+        }
+        else if (vetPrecos[i] > 1000){
+            vetNovos[i] = vetPrecos[i] + (vetPrecos[i]*10/100)
+        }
+        else {
+            vetNovos[i] = -1 // indica que não teve aumento
+        }
+    }
+    for(let i=0;i<10;i++){
+        if (vetNovos[i] != -1) {
+            alert(`Produto ${vetNomes[i]} com código ${vetCodigos[i]} tinha preço ${vetPrecos[i]} e terá novo preço ${vetNovos[i]}`)
+        }
+    }
+   
 }
